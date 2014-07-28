@@ -1,0 +1,30 @@
+{
+  "name": "SPA-Using-Dojo",
+  "version": "0.0.1",
+  "description": "SPA Using DOJO in MVCS (Model View Controller Service) . Our Model Will be View Model and Controller will be View Controller",
+  "main": "/app/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sanyamagrawal/SPA-Using-Dojo.git"
+  },
+  "keywords": [
+    "DOJO",
+    "SPADOJO",
+    "MVCSDOJO",
+    "MVC"
+  ],
+  "author": "Sanyam Agrawal ( Sanyam)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sanyamagrawal/SPA-Using-Dojo/issues"
+  },
+  "homepage": "https://github.com/sanyamagrawal/SPA-Using-Dojo",
+  "dependencies": {
+    "express": "^4.7.2",
+    "morgan": "^1.2.2"
+  }
+}
