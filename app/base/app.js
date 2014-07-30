@@ -1,0 +1,1 @@
+console.log("Application Inilization To begin Now!! Fasten Your Seat Belt");
