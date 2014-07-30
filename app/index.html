@@ -32,6 +32,10 @@
     <!-- Load the loader configuration script. Note that this module ID is hard-coded in build.sh in order to provide
          an optimised build that loads as few as one script for the entire application. If you change the name or
          location of this module, you will need to update build.sh too. -->
-    <script src="base/app.js"></script>
+    <script>
+        require(["base/app.js"],function(app){
+            app.render();
+        });
+    </script>
 </body>
 </html>
