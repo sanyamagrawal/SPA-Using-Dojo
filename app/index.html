@@ -26,15 +26,30 @@
          The remainder of Dojo configuration, as well as our application’s instantiation, occurs within
          app/run.js.
     -->
+    <script>
+        var dojoConfig = {
+            baseUrl: './',
+            async: 1,
+            tlmSiblingOfDojo: 0,
+            isDebug: 1,
+            packages:[{
+                name:"dojo",
+                location:"./libs/dojo"
+            },{
+                name:"dijit",
+                location:"./libs/dijit"
+            }],
+        };
 
-    <script data-dojo-config="async: 1, tlmSiblingOfDojo: 0, isDebug: 1" src="libs/dojo/dojo.js"></script>
+    </script>
+    <script src="libs/dojo/dojo.js"></script>
 
     <!-- Load the loader configuration script. Note that this module ID is hard-coded in build.sh in order to provide
          an optimised build that loads as few as one script for the entire application. If you change the name or
          location of this module, you will need to update build.sh too. -->
     <script>
         require(["base/app.js"],function(app){
-            app.render();
+            app.initialize();
         });
     </script>
 </body>

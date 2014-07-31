@@ -5,7 +5,7 @@ var morgan = require("morgan");
 var app = express();
 
 // Serve up content from public directory
-app.use(express.static(__dirname + "/app"));
+app.use(express.static(__dirname));
 //Start Logging
 app.use(morgan("short"));
 
