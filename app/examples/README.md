@@ -1,0 +1,1 @@
+This folder will contain small DOJO specific examples for me to understand different mechanics of how DOJO operates
