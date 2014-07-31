@@ -1,15 +1,12 @@
 define([
     "dojo/_base/declare",
-    "dijit/_WidgetBase",
-    "dijit/_TemplatedMixin",
-    "dojo/text!./templates/ShellView.html"
-], function(declare, WidgetBase, TemplatedMixin, template) {
+    "dojo/dom-construct",
+    "dijit/_WidgetBase"
+], function(declare, domConstruct, WidgetBase) {
 
-    return declare([WidgetBase, TemplatedMixin], {
+    return declare([WidgetBase], {
 
         value: 1,
-
-        templateString: template,
 
         baseClass : "dojoSPA",
 
@@ -30,6 +27,7 @@ define([
 
         buildRendering: function() {
             console.log("Reached BuildRendering" + this.value++);
+            this.domNode = domConstruct.create("button", {innerHTML: "push me"});
             this.inherited(arguments);
         },
 
