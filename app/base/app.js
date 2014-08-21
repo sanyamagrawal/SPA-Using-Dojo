@@ -27,6 +27,11 @@ define([
         //The First Page to Show to the User. Either Take it from param or from defaultPath
         defaultPath: "aboutme",
 
+        /*Since we are destroying our page when the user navigates. We need a way to re-create the previous page.
+        so we need to store the states in an array and use it as a means to move backwards
+        */
+        histroyStack : [],
+
         constructor: function() {
             console.log("Reached Constructor");
         },
@@ -48,7 +53,6 @@ define([
                 controllerVC;
             require(["shell/ShellController"], function(Controller) {
                 controllerVC = new Controller();
-                this.currentViewController = controllerVC;
                 def.resolve(controllerVC);
             }.bind(this));
             return def;
@@ -61,13 +65,16 @@ define([
             this.viewControllerDomNode = document.querySelector(".domContainer");
 
             window.addEventListener("click", function(event) {
+                event.preventDefault();
+                event.stopPropagation();
                 // current browser path with query params
                 if (event.which !== 1 && event.target.tagName !== "A") {
                     return;
                 }
-                var path = window.location.pathname + window.location.search || "";
+                var path = event.target.pathname + event.target.search || "";
                 this.clickRoute(path);
 
+                return false;
             }.bind(this));
 
             window.addEventListener("popstate", function(event) {
@@ -122,7 +129,7 @@ define([
         //Setup HTML5 histroy related stuff
         setupHistory: function(pathKey) {
             this.currentViewPath = pathKey;
-            history.pushState(null, null, this.currentViewPath);
+            history.pushState(null, null, "/app/" + this.currentViewPath);
         },
 
         //Destroy the View Controller and Remove the DOM Node from the Shell
