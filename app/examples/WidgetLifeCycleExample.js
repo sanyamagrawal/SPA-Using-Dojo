@@ -30,6 +30,8 @@ define([
             this.domNode = domConstruct.create("button", {
                 innerHTML: "push me"
             });
+            var node = "<div>Sanyam</div>";
+            this.domNode = node;
             this.inherited(arguments);
         },
 
