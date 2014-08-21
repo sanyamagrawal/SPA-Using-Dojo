@@ -5,7 +5,7 @@
 */
 define({
     routes : {
-        "aboutme" : "aboutme/AboutMeViewController",
-        "contactme" : "contactme/ContactMeViewController"
+        "aboutme" : "aboutme/AboutMeController",
+        "mywork" : "mywork/MyWorkController"
     }
 });

@@ -7,13 +7,13 @@ define([
     "dijit/_WidgetBase",
     "dijit/_TemplatedMixin",
     "dojo/text!./templates/ShellView.html"
-], function(declare, WidgetBase, TemplatedMixin, template) {
+], function (declare, WidgetBase, TemplatedMixin, template) {
 
     return declare([WidgetBase, TemplatedMixin], {
 
         baseClass : "dojoSPA",
 
-        templateString : template,
+        templateString : template
 
     });
 
