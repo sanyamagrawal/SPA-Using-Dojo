@@ -8,5 +8,13 @@ Steps to Get Started With This Project :
 1. git clone git@github.com:sanyamagrawal/SPA-Using-Dojo.git
 2. cd SPA-Using-Dojo
 3. npm install
-4. grunt dev
-5. node server.js
+
+Post npm install the *command grunt dev will run automatically* which does the following things.
+
+"Grunt dev" command will do the following:
+-------------------------------
+1. Download the the Project Dependencies defined in Bower.js
+2. Start a Local Server via the command node server.js
+3. Open the browser on 3000 port http://localhost:3000/app
+4. Wait for the server.js
+5. if you want to kill the server just press ctrl+z

@@ -5,7 +5,9 @@
   "main": "/app/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    //One Npm install is done , we can automate the task of running grunt dev
+    "postinstall": "grunt dev"
+
   },
   "repository": {
     "type": "git",
@@ -30,6 +32,8 @@
     "grunt": "^0.4.5",
     "grunt-contrib-copy": "^0.5.0",
     "grunt-contrib-clean": "^0.6.0",
-    "grunt-bower-install-simple": "^1.0.0"
+    "grunt-bower-install-simple": "^1.0.0",
+    "grunt-run": "^0.2.4",
+    "grunt-open": "^0.2.3"
   }
 }

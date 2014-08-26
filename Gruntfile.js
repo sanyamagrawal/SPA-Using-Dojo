@@ -30,7 +30,6 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
 
-        //Task 1
         /* This Task will be used to create the build. Currently only copying files form source to destination*/
         copy: {
             build: {
@@ -41,7 +40,6 @@ module.exports = function(grunt) {
             },
         },
 
-        //Task 2
         /* Everyime we do a build, It would be convinent to delete the files and re install it */
         clean: {
             build: {
@@ -49,7 +47,6 @@ module.exports = function(grunt) {
             },
         },
 
-        //Task 3
         /*Automating the Work of installing Bower dependencies. Now the only command needed is grunt*/
         "bower-install-simple": {
             options: {
@@ -60,6 +57,26 @@ module.exports = function(grunt) {
                     production: false
                 }
             }
+        },
+
+        /* Automating the task of Running a Local server to fetch files.*/
+        run: {
+            options: {
+                wait: false
+            },
+            server: {
+                //Default executable command is node. If you want to specify anything else use exec : "node server.js"
+                args: ["./server.js"]
+            }
+        },
+
+        /* Opening the browerser with a specific URL . can be changed for prod and dev and qa*/
+        open: {
+            dev: {
+                path: "http://localhost:3000/app",
+                app: "Google Chrome"
+            }
+
         }
     });
 
@@ -67,8 +84,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.loadNpmTasks("grunt-bower-install-simple");
+    grunt.loadNpmTasks("grunt-run");
+    grunt.loadNpmTasks("grunt-open");
 
     //STEP3: Default task(s).
     grunt.registerTask("default", ["bower-install-simple", "clean", "copy"]);
-    grunt.registerTask("dev", ["bower-install-simple"]);
+    grunt.registerTask("startServer", ["run:server", "open:dev", "wait:server"]);
+    grunt.registerTask("dev", ["bower-install-simple", "startServer"]);
 };
