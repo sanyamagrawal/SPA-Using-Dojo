@@ -47,14 +47,28 @@ module.exports = function(grunt) {
             build: {
                 src: ["build"]
             },
-        }
+        },
 
+        //Task 3
+        /*Automating the Work of installing Bower dependencies. Now the only command needed is grunt*/
+        "bower-install-simple": {
+            options: {
+                color: true,
+            },
+            "dev": {
+                options: {
+                    production: false
+                }
+            }
+        }
     });
 
     //STEP2: Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-contrib-clean");
+    grunt.loadNpmTasks("grunt-bower-install-simple");
 
     //STEP3: Default task(s).
-    grunt.registerTask("default", ["clean", "copy"]);
+    grunt.registerTask("default", ["bower-install-simple", "clean", "copy"]);
+    grunt.registerTask("dev", ["bower-install-simple"]);
 };
