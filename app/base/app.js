@@ -1,18 +1,16 @@
 define([
     "dojo/_base/declare",
-    "dojo/_base/lang",
     "dojo/when",
     "dojo/Deferred",
-    "dojo/io-query",
-
-    "./RouterConfig",
-], function(declare, lang, when, Deferred, ioquery, router) {
+    "./Router",
+    "./RouterConfig"
+], function(declare, when, Deferred, Router, routerConfig) {
 
 
     var App = declare(null, {
 
         //Location Where App will get attached
-        appContainer: document.body,
+        appContainer: null,
 
         //Which Controller is currently being shown in the View.
         // Type Parent Controller
@@ -30,10 +28,18 @@ define([
         /*Since we are destroying our page when the user navigates. We need a way to re-create the previous page.
         so we need to store the states in an array and use it as a means to move backwards
         */
-        histroyStack : [],
+        histroyStack: [],
 
-        constructor: function() {
+        /**
+         * Instance of router . This will be responsible for app level routing and history management
+         * @param {Array} An array of routes on which the router will operate on. See Router.js to know more about the structure of each route
+         */
+        router: null,
+
+        constructor: function(args) {
             console.log("Reached Constructor");
+            this.appContainer = (args && args.rootNode) || document.body;
+            this.router = new Router(routerConfig);
         },
 
         //App Initialization To Being Here.
@@ -44,7 +50,7 @@ define([
             when(this.initializeShell(), function(vc) {
                 this.appContainer.appendChild(vc.domNode);
                 this.initAppEvent();
-                this.instantiateClass("aboutme");
+                this.navigateToRoute("aboutme");
             }.bind(this));
         },
 
@@ -72,7 +78,7 @@ define([
                     return;
                 }
                 var path = event.target.pathname + event.target.search || "";
-                this.clickRoute(path);
+                this.navigateToRoute(path);
 
                 return false;
             }.bind(this));
@@ -83,38 +89,23 @@ define([
             });
         },
 
-        //When the use clicks on a A tag then we need to route to that page
-        // Here we need to make path params as object and extract parts of the URL
-        clickRoute: function(path) {
-
-            var pathWithParam,
-                beforePath = "/app/",
-                pathKey,
-                pathParams,
-                params;
-
-            if (path && path.indexOf(beforePath) === 0) {
-                pathWithParam = path.substring(beforePath.length);
-            }
-
-            pathWithParam = pathWithParam.split("?");
-            pathKey = pathWithParam[0];
-            pathParams = pathWithParam[1];
-            params = pathParams ? lang.mixin({}, ioquery.queryToObject(pathParams)) : {};
-            this.instantiateClass(pathKey, params);
+        navigateToRoute: function(path) {
+            var options = this.router.getConfig(path);
+            this.instantiateClass(options);
         },
 
         //Responsible for getting The view Controller, Instantiating the View Controller and saving it in Histroy API
-        instantiateClass: function(pathKey, options) {
+        instantiateClass: function(options) {
+            var pathKey = options.path,
+                params = options.params,
+                controllerPath;
+
             this.destroyViewAndClass();
-            var controllerPath = this.getControllerPathFromKey(pathKey);
-            when(this.instantiateViewAndClass(controllerPath, options), this.setupHistory.bind(this, pathKey));
+            controllerPath = this.router.getControllerPathFromKey(pathKey);
+            when(this.instantiateViewAndClass(controllerPath, params), this.setupHistory.bind(this, pathKey));
         },
 
-        //Given a key get the Controller for the key
-        getControllerPathFromKey: function(key) {
-            return router.routes[key];
-        },
+
 
         //Instantiate a View Controller and Render the DOM Node to the Shell
         instantiateViewAndClass: function(controllerPath, options) {

@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "grunt dev"
-
   },
   "repository": {
     "type": "git",
@@ -33,6 +32,7 @@
     "grunt-contrib-clean": "^0.6.0",
     "grunt-bower-install-simple": "^1.0.0",
     "grunt-run": "^0.2.4",
-    "grunt-open": "^0.2.3"
+    "grunt-open": "^0.2.3",
+    "intern": "^2.0.3"
   }
 }
