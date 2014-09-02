@@ -1,4 +1,4 @@
-/**
+/*
 
 From your link
 
@@ -19,7 +19,8 @@ define([
 ], function(lang, ioquery) {
 
     /**
-     * @constructs
+     * Router Constructor
+     * @param {Object} args Takes and argument that is required to Configure the router.
      */
     var Router = function(args) {
 
@@ -48,6 +49,7 @@ define([
          * Adds a list of Routes to router by interating over it.
          * @param {Array} routes A list of Array Of Routes Object that needs to be added to the router
          */
+        
         initRoute: function(routes) {
             if (!routes) {
                 return;
@@ -101,11 +103,12 @@ define([
             return path.split("?")[0];
         },
 
-        //Given a key get the Controller for the key
+        
         /**
-         * [getControllerPathFromKey description]
-         * @param  {[type]} key [description]
-         * @return {[type]}     [description]
+         * Given a key get the Controller for the key
+         * @param  {String} key The matcher path for which the view controller needs to be found out
+         * @return {String}     View Controller for the matched String.
+         * @private
          */
         getControllerPathFromKey: function(key) {
             return this.routes[key];

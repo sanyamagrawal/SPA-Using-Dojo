@@ -54,6 +54,10 @@ define([
             }.bind(this));
         },
 
+        /**
+         *  Function To Get the Shell Of the Application
+         * @return {Deferred} Returns a promise that is either fullfilled or rejected.
+         */
         initializeShell: function() {
             var def = new Deferred(),
                 controllerVC;
