@@ -24,14 +24,6 @@ define([
      */
     var Router = function(args) {
 
-        if (!args) {
-            return;
-        }
-
-        if (!args.routes) {
-            return;
-        }
-
         /**
          * An Object of routes on which the Router will operate. Each Route in routes will be of the format.
          *     Key : {String} -  A String that represents/matches the routes.
@@ -40,7 +32,7 @@ define([
          */
         this.routes = {};
 
-        this.initRoute(args.routes);
+        this.initRoute((args &&args.routes)||{});
     };
 
     Router.prototype = {

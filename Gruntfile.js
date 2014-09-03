@@ -80,13 +80,40 @@ module.exports = function(grunt) {
 
         },
 
+        /*
+         See http://usejsdoc.org/ For More Info. Used to Generate Java Like Documantation for Javascript.
+         */
         jsdoc : {
             dist : {
                 src: ["app/**/*", "!app/libs/**/*"],
                 dest: 'doc'
             }
-        }
+        },
 
+        /*
+        Configuration Of Intern to automate the Unit Test Cases. We are using Intern as our JS Testing Framework.
+        Link For using Intern With Grunt : https://github.com/theintern/intern/wiki/Using-Intern-with-Grunt
+         */
+        
+        intern: {
+            
+            runner: {
+                options: {
+                    runType: 'runner',
+                    config: 'tests/intern'
+                }
+                
+            },
+
+            client: {
+                options : {
+                    config: 'tests/intern',
+                    runType: 'client' // Client is the default option for runType, didnt have to include this . Was Not required.
+                }
+            }
+
+            
+        }
 
     });
 
@@ -96,10 +123,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-bower-install-simple");
     grunt.loadNpmTasks("grunt-run");
     grunt.loadNpmTasks("grunt-open");
-    grunt.loadNpmTasks("grunt-jsdoc")
+    grunt.loadNpmTasks("grunt-jsdoc");
+    grunt.loadNpmTasks('intern');
 
     //STEP3: Default task(s).
     grunt.registerTask("default", ["bower-install-simple", "clean", "copy"]);
     grunt.registerTask("startServer", ["run:server", "open:dev", "wait:server"]);
     grunt.registerTask("dev", ["bower-install-simple", "startServer"]);
+    grunt.registerTask("test", ["intern:client"]);
 };

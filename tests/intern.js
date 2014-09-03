@@ -37,6 +37,9 @@ define({
 	// Name of the tunnel class to use for WebDriver tests
 	tunnel: 'SauceLabsTunnel',
 
+	// Whether or not to start Sauce Connect before running tests
+    useSauceConnect: false,
+        
 	// The desired AMD loader to use when running unit tests (client.html/client.js). Omit to use the default Dojo
 	// loader
 	useLoader: {
