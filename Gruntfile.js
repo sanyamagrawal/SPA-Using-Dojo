@@ -22,7 +22,7 @@ Basic Grunt Structure
     };
 
 */
-
+/* jshint node: true */
 module.exports = function(grunt) {
     // Do grunt-related things in here
 
@@ -37,7 +37,7 @@ module.exports = function(grunt) {
                 src: ["**/*", "!**/libs/**"],
                 dest: "build",
                 expand: true
-            },
+            }
         },
 
         /* Everyime we do a build, It would be convinent to delete the files and re install it */
@@ -51,7 +51,7 @@ module.exports = function(grunt) {
         /*Automating the Work of installing Bower dependencies. Now the only command needed is grunt*/
         "bower-install-simple": {
             options: {
-                color: true,
+                color: true
             },
             "dev": {
                 options: {
@@ -86,7 +86,7 @@ module.exports = function(grunt) {
         jsdoc : {
             dist : {
                 src: ["app/**/*", "!app/libs/**/*"],
-                dest: 'doc'
+                dest: "doc"
             }
         },
 
@@ -94,27 +94,49 @@ module.exports = function(grunt) {
         Configuration Of Intern to automate the Unit Test Cases. We are using Intern as our JS Testing Framework.
         Link For using Intern With Grunt : https://github.com/theintern/intern/wiki/Using-Intern-with-Grunt
          */
-        
+
         intern: {
-            
+
             runner: {
                 options: {
-                    runType: 'runner',
-                    config: 'tests/intern'
+                    runType: "runner",
+                    config: "tests/intern"
                 }
-                
+
             },
 
             client: {
                 options : {
-                    config: 'tests/intern',
-                    runType: 'client' // Client is the default option for runType, didnt have to include this . Was Not required.
+                    config: "tests/intern",
+                    runType: "client" // Client is the default option for runType, didnt have to include this . Was Not required.
                 }
             }
 
-            
-        }
+        },
 
+        jscs :{
+            source: {
+                src: ["app/**/*.js", "!app/libs/**/*"]
+            },
+            test: {
+                src: ["./test/**/*.js"]
+            }
+        },
+
+        jshint : {
+            gruntfile: {
+                options: {
+                    jshintrc: ".jshintrcgruntfile"
+                },
+                src: "Gruntfile.js"
+            },
+            source: {
+                src: ["app/**/*.js", "!app/libs/**/*"]
+            },
+            test: {
+                src: ["./test/**/*.js"]
+            }
+        }
     });
 
     //STEP2: Load the plugin that provides the "uglify" task.
@@ -124,11 +146,18 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-run");
     grunt.loadNpmTasks("grunt-open");
     grunt.loadNpmTasks("grunt-jsdoc");
-    grunt.loadNpmTasks('intern');
+    grunt.loadNpmTasks("intern");
+    grunt.loadNpmTasks("grunt-contrib-jshint");
+    grunt.loadNpmTasks("grunt-jscs");
 
     //STEP3: Default task(s).
     grunt.registerTask("default", ["bower-install-simple", "clean", "copy"]);
     grunt.registerTask("startServer", ["run:server", "open:dev", "wait:server"]);
     grunt.registerTask("dev", ["bower-install-simple", "startServer"]);
+
+    //Test Tasks
     grunt.registerTask("test", ["intern:client"]);
+
+    //Linting tasks
+    grunt.registerTask("lint", ["jshint", "jscs"]);
 };
