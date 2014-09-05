@@ -18,3 +18,7 @@ Post npm install the *command grunt dev will run automatically* which does the f
 3. Open the browser on 3000 port http://localhost:3000/app
 4. Wait for the server.js
 5. if you want to kill the server just press ctrl+z
+
+Sublime Text 2 Settings Packages That need to be installed
+
+http://www.ladysign-apps.com/developer/mac-osx-how-to-install-jshint-to-the-commandline-sublime-text-with-node/#.VAlz7GSSyAZ
