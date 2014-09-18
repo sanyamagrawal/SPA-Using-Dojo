@@ -110,9 +110,26 @@ module.exports = function(grunt) {
                     config: "tests/intern",
                     runType: "client" // Client is the default option for runType, didnt have to include this . Was Not required.
                 }
-            }
-
+            } 
         },
+
+<<<<<<< HEAD
+        },
+=======
+        compass: {
+            options: {
+                config: "./app/assets/config.rb",
+                basePath: ".",
+                trace: true
+            },
+            clean: {
+                options: {
+                    clean: true
+                }
+            },
+            compile: {}
+        }
+>>>>>>> Adding Compass Grunt Task along with SASS
 
         jscs :{
             source: {
@@ -146,9 +163,14 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-run");
     grunt.loadNpmTasks("grunt-open");
     grunt.loadNpmTasks("grunt-jsdoc");
+<<<<<<< HEAD
     grunt.loadNpmTasks("intern");
     grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-jscs");
+=======
+    grunt.loadNpmTasks('intern');
+    grunt.loadNpmTasks('grunt-contrib-compass');
+>>>>>>> Adding Compass Grunt Task along with SASS
 
     //STEP3: Default task(s).
     grunt.registerTask("default", ["bower-install-simple", "clean", "copy"]);
