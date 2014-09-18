@@ -83,8 +83,8 @@ module.exports = function(grunt) {
         /*
          See http://usejsdoc.org/ For More Info. Used to Generate Java Like Documantation for Javascript.
          */
-        jsdoc : {
-            dist : {
+        jsdoc: {
+            dist: {
                 src: ["app/**/*", "!app/libs/**/*"],
                 dest: "doc"
             }
@@ -106,16 +106,13 @@ module.exports = function(grunt) {
             },
 
             client: {
-                options : {
+                options: {
                     config: "tests/intern",
                     runType: "client" // Client is the default option for runType, didnt have to include this . Was Not required.
                 }
-            } 
+            }
         },
 
-<<<<<<< HEAD
-        },
-=======
         compass: {
             options: {
                 config: "./app/assets/config.rb",
@@ -128,10 +125,9 @@ module.exports = function(grunt) {
                 }
             },
             compile: {}
-        }
->>>>>>> Adding Compass Grunt Task along with SASS
+        },
 
-        jscs :{
+        jscs: {
             source: {
                 src: ["app/**/*.js", "!app/libs/**/*"]
             },
@@ -140,7 +136,7 @@ module.exports = function(grunt) {
             }
         },
 
-        jshint : {
+        jshint: {
             gruntfile: {
                 options: {
                     jshintrc: ".jshintrcgruntfile"
@@ -163,14 +159,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-run");
     grunt.loadNpmTasks("grunt-open");
     grunt.loadNpmTasks("grunt-jsdoc");
-<<<<<<< HEAD
     grunt.loadNpmTasks("intern");
     grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-jscs");
-=======
-    grunt.loadNpmTasks('intern');
-    grunt.loadNpmTasks('grunt-contrib-compass');
->>>>>>> Adding Compass Grunt Task along with SASS
+    grunt.loadNpmTasks("intern");
+    grunt.loadNpmTasks("grunt-contrib-compass");
 
     //STEP3: Default task(s).
     grunt.registerTask("default", ["bower-install-simple", "clean", "copy"]);
